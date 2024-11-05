@@ -1,0 +1,36 @@
+DSP = 0.68
+""" Setting of LIPM parameters """
+        # Amplitude of swing
+        b1 = -0.225
+        b2 = 0.216
+
+        # Motor 31/35 and Motor 41/45
+        # 正： 腰與腳踝彎曲方向一致 #調小重心轉換沒那麼過去!
+        hip1 = 0.26
+        hip2 = 0.21
+
+        # Step Height
+        stepHeight1 = 0.05
+        stepHeight2 = 0.05
+
+        # Forward Distance
+        stepSize1 = 0.15
+        stepSize2 = 0.
+
+        # Lateral Displacement
+        shift1 = [0.0, 0]
+        shift2 = [0, 0.0]
+
+        # Motor 30 and Motor 40
+        yawAngleR = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0]]  # 正: 往外開
+        yawAngleL = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0]]  # 正: 往外開
+
+        # Motor 34 and Motor 44
+        initLeanAngleR = 0
+        initLeanAngleL = 0
+        leanAngleR = [[0, 0, 0, 0, 0], [-2, -3, -3, -3, 0]]  # 正: 腳尖向下
+        leanAngleL = [[0, 0, 0, 0, 0], [0, 2, 3, 3, 0]]  # 正: 腳尖向下
+
+        # Motor 35 and Motor 45 
+        pedalRollAngleR = [[0, 0, 0, 0, 0], [0, 0,  0,  0, 0]]    # 正: 往內番
+        pedalRollAngleL = [[0, 0, 0, 0, 0], [0, 0,  0,  0, 0]]   # 正: 往內番
