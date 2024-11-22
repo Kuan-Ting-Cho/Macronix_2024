@@ -1,0 +1,75 @@
+down_stair 8 cm - not adjust initial pose
+""" Setting of LIPM parameters """
+        # Amplitude of swing
+        b1 = -0.215
+        b2 = 0.211
+
+        # Motor 31/35 and Motor 41/45
+        # 正： 腰與腳踝彎曲方向一致 #調小重心轉換沒那麼過去!
+        hip1 = 0.26
+        hip2 = 0.24
+
+        # Step Height
+        stepHeight1 = 0.1
+        stepHeight2 = 0.1
+
+        # Forward Distance
+        stepSize1 = 0.36
+        stepSize2 = -0.02
+
+        # Lateral Displacement
+        shift1 = [0.0, 0]
+        shift2 = [0, 0.0]
+
+        # Motor 30 and Motor 40
+        yawAngleR = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0]]  # 正: 往外開
+        yawAngleL = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0]]  # 正: 往外開
+
+        # Motor 34 and Motor 44
+        initLeanAngleR = 0
+        initLeanAngleL = 0
+        leanAngleR = [[0, 0, 0, -2, -2], [0, 0, -5, -5, 3]]  # 正: 腳尖向down
+        leanAngleL = [[0, 0, 0, 0, 0], [0, 5, 5, 0, 0]]  # 正: 腳尖向下
+
+        # Motor 35 and Motor 45 
+        pedalRollAngleR = [[0, 0, 0, 0, 0], [0, -5,  -10,  -10, 0]]    # 正: 往內番
+        pedalRollAngleL = [[0, 0, 0, 0, 0], [0, 0,  0,  -5, -5]]   # 正: 往內番
+
+down_stair 8, 9, 10 cm
+Initial pos bias = 0.2, corresponding footHeight = 925
+zcSinusoid = 0.06
+""" Setting of LIPM parameters """
+        # Amplitude of swing
+        b1 = -0.215
+        b2 = 0.231
+
+        # Motor 31/35 and Motor 41/45
+        # 正： 腰與腳踝彎曲方向一致 #調小重心轉換沒那麼過去!
+        hip1 = 0.26
+        hip2 = 0.24
+
+        # Step Height
+        stepHeight1 = 0.1
+        stepHeight2 = 0.1
+
+        # Forward Distance
+        stepSize1 = 0.28
+        stepSize2 = -0.05
+
+        # Lateral Displacement
+        shift1 = [0.0, 0]
+        shift2 = [0, 0.0]
+
+        # Motor 30 and Motor 40
+        yawAngleR = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0]]  # 正: 往外開
+        yawAngleL = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0]]  # 正: 往外開
+
+        # Motor 34 and Motor 44
+        initLeanAngleR = 0
+        initLeanAngleL = 0
+        leanAngleR = [[0, 0, 0, 0, 0], [0, -3, -3, -4, 0]]  # 正: 腳尖向down
+        leanAngleL = [[0, 0, 0, -0, -0], [-10, -10, 0, 5, 5]]  # 正: 腳尖向下
+
+        # Motor 35 and Motor 45 
+        pedalRollAngleR = [[0, 0, 0, 0, 0], [0, 0,  -0,  -0, 0]]    # 正: 往內番
+        pedalRollAngleL = [[0, 0, 0, 0, 0], [0, 0,  0,  0, 0]]   # 正: 往內番
