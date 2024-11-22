@@ -1,2 +1,0 @@
-robot
--DCATKIN_DEVEL_PREFIX=/home/airobots/node/devel -DCMAKE_INSTALL_PREFIX=/home/airobots/node/install -G Unix Makefiles
