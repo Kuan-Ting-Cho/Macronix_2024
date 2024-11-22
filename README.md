@@ -5,7 +5,7 @@
 ## 模擬影片
 [![模擬影片](https://img.youtube.com/vi/DtHmWgVyCPI/0.jpg)](https://www.youtube.com/watch?v=DtHmWgVyCPI)
 ## 優勝獎
-[第二十二屆旺宏金矽獎 半導體設計與應用大賽 優勝獎_獎狀](https://github.com/user-attachments/assets/30253aed-6e60-4f00-baa1-990223924b51)
+[第二十四屆旺宏金矽獎 半導體設計與應用大賽 優勝獎_獎狀](https://github.com/user-attachments/assets/30253aed-6e60-4f00-baa1-990223924b51)
 ## International and System Science and Engineering 2024 (ICSSE 2024)
 [ICSSE 2024 conference paper](https://github.com/Kuan-Ting-Cho/Macronix_2024/blob/main/Mechanism%20and%20System%20Design%20of%20Linkage%20Driven%20Humanoid%20Robot.pdf)\
 [ICSSE 2024_獎狀](https://github.com/user-attachments/assets/f3b2eac2-80f3-41f5-9eda-311fcf2eda83)
