@@ -271,5 +271,38 @@ def euler_to_rotation_matrix(imu_data):
         [-s_pitch,         c_pitch * s_roll,                          c_pitch * c_roll]
     ])
     return R
-a=0
-Controller(a)
+
+def generate_ST_motion(step, balance_step, trans_point, period, motion, Cmd, 
+                    motion_fr, motion_fl, motion_sr, motion_sl):
+
+    if step <= trans_point[0]:
+        temp = (step - balance_step) // period[0] + 1
+        foot = temp % 2
+        excution_step = balance_step + temp * period[0]
+        Cmd = [[1, 3]] * len(Cmd) if period[0] < period[1] else [[0, 3]] * len(Cmd)
+        if foot == 1:  # Right stop
+            motion[balance_step + (temp - 1) * period[0]:excution_step] = motion_fr
+        else:  # Left stop
+            motion[balance_step + (temp - 1) * period[0]:excution_step] = motion_fl
+
+    elif trans_point[0] < step <= trans_point[1]:
+        temp = (step - trans_point[0]) // period[1] + 1
+        foot = temp % 2
+        excution_step = trans_point[0] + temp * period[1]
+        Cmd = [[0, 3]] * len(Cmd) if period[0] < period[1] else [[1, 3]] * len(Cmd)
+        if foot == 1:  # Right stop
+            motion[trans_point[0] + (temp - 1) * period[1]:excution_step] = motion_sr
+        else:  # Left stop
+            motion[trans_point[0] + (temp - 1) * period[1]:excution_step] = motion_sl
+
+    elif step > trans_point[1]:
+        temp = (step - trans_point[1]) // period[2] + 1
+        foot = temp % 2
+        excution_step = trans_point[1] + temp * period[2]
+        Cmd = [[0, 3]] * len(Cmd) if period[1] < period[2] else [[1, 3]] * len(Cmd)
+        if foot == 1:  # Right stop
+            motion[trans_point[1] + (temp - 1) * period[2]:excution_step] = motion_sr
+        else:  # Left stop
+            motion[trans_point[1] + (temp - 1) * period[2]:excution_step] = motion_sl
+
+    return motion, excution_step, Cmd

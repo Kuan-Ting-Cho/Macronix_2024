@@ -8,7 +8,7 @@ import threading
 import matplotlib.pyplot as plt
 from LIPM.F2 import Forward2
 from robot.scripts.cmd import *
-from Xiang.downstair.function import *
+from Climbing_ctrl.downstair.function import *
 import subprocess
 
 
@@ -48,7 +48,7 @@ def main():
         LIPM_obj.output_motion()
 
         initial_stable_time = 50
-        motion_file = './Xiang/downstair/motordata/F2_200.csv'
+        motion_file = './Climbing_ctrl/downstair/motordata/F2_200.csv'
         motion = pd.read_csv(motion_file, header=None,index_col=None)
         motion=Data_preprocess(motion, initial_stable_time, floor) # 50 stable + 200 + 50 stable + 100 inital
 
@@ -117,9 +117,9 @@ def main():
 
             if step == excution_step-2:
                 r_motion = np.array(r_motion)
-                pd.DataFrame(r_motion).to_csv("Xiang/return.csv",header=None,index=False)
-                pd.DataFrame(d_motion).to_csv("Xiang/desired.csv",header=None,index=False)
-                msg1 = subprocess.Popen(['scp', 'Xiang/return.csv', 'Xiang/desired.csv', 'Xiang/hand_modify/motordata/F2_200.csv','airobots@192.168.1.232:~/Linkage_Robot_simulation/src/localcom/Xiang'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                pd.DataFrame(r_motion).to_csv("Climbing_ctrl/return.csv",header=None,index=False)
+                pd.DataFrame(d_motion).to_csv("Climbing_ctrl/desired.csv",header=None,index=False)
+                msg1 = subprocess.Popen(['scp', 'Climbing_ctrl/return.csv', 'Climbing_ctrl/desired.csv', 'Climbing_ctrl/hand_modify/motordata/F2_200.csv','airobots@192.168.1.232:~/Linkage_Robot_simulation/src/localcom/Climbing_ctrl'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                 print("plot")
 
                 break
@@ -137,15 +137,15 @@ if __name__ == '__main__':
     print("Go !! Attention ฅ^•ﻌ•^ฅ\n-(///￣皿￣)☞ ─═≡☆゜★\n                      █▇▆▅▄▃▂＿　")
     try:
         imu = threading.Thread(target = update_IMU)
-        # fsr = threading.Thread(target = update_fsr)
+        fsr = threading.Thread(target = update_fsr)
         recv = threading.Thread(target = get_status)
         cmd = threading.Thread(target = main)
         imu.start()
-        # fsr.start()
+        fsr.start()
         recv.start()
         cmd.start()
         imu.join()
-        # fsr.join()
+        fsr.join()
         recv.join()
         cmd.join()
         

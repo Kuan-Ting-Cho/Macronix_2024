@@ -63,14 +63,14 @@ def main():
 
     #-----------------改初始動作--------------------------#
     if chgini:
-        with open('yenming/src/finalterrain.csv') as csvFile : #開啟檔案
+        with open('Uneven_ctrl/src/finalterrain.csv') as csvFile : #開啟檔案
             csvReader = csv.reader(csvFile) #將檔案建立成Reader物件
             listReport = list(csvReader)
         firstterrain = listReport[0]
         for i in range(len(firstterrain)):
             firstterrain[i]=float(firstterrain[i])
 
-        with open('yenming/src/F2_200.csv') as csvFile : #開啟檔案
+        with open('Uneven_ctrl/src/F2_200.csv') as csvFile : #開啟檔案
             csvReader2 = csv.reader(csvFile) #將檔案建立成Reader物件
             listReport2 = list(csvReader2)
         finalposeterrain = listReport2[len(listReport2)-1]
@@ -87,7 +87,7 @@ def main():
         for i in range(len(finalterrain)):
             isflat += finalterrain[i]
         LIPM_obj.output_motion(deg2rad(np.array(desired[1:])),2,isflat)
-        motion = csv2cmd('yenming/src/F2_200.csv' )
+        motion = csv2cmd('Uneven_ctrl/src/F2_200.csv' )
         # time.sleep(10000000)
     #-----------------改初始動作--------------------------#
 
@@ -95,7 +95,7 @@ def main():
                     #(角度)左腳結束pitch、左腳結束roll、右腳結束pitch、右腳結束roll
                     #pitch:正：壓,  roll:正：左翻
     #-----------------讀前一個finalterrain--------------------------#
-    with open('yenming/src/finalterrain.csv') as csvFile : #開啟檔案
+    with open('Uneven_ctrl/src/finalterrain.csv') as csvFile : #開啟檔案
         csvReader = csv.reader(csvFile) #將檔案建立成Reader物件
         listReport = list(csvReader)
     firstterrain = listReport[0]
@@ -103,7 +103,7 @@ def main():
         firstterrain[i]=float(firstterrain[i])
     #-----------------讀前一個finalterrain--------------------------#
     #-----------------讀前一個finalposeterrain--------------------------#
-    with open('yenming/src/F2_200.csv') as csvFile : #開啟檔案
+    with open('Uneven_ctrl/src/F2_200.csv') as csvFile : #開啟檔案
         csvReader2 = csv.reader(csvFile) #將檔案建立成Reader物件
         listReport2 = list(csvReader2)
     finalposeterrain = listReport2[len(listReport2)-1]
@@ -145,7 +145,7 @@ def main():
         for i in range(len(finalterrain)):
             isflat += finalterrain[i]
         LIPM_obj.output_motion(deg2rad(np.array(desired[1:])),footstep,isflat)
-        motion = csv2cmd('yenming/src/F2_200.csv' )
+        motion = csv2cmd('Uneven_ctrl/src/F2_200.csv' )
         print("desired=",desired)
         print("firstterrain=",LIPM_obj.firstterrain)
         print("finalterrain=",LIPM_obj.finalterrain)
@@ -166,9 +166,9 @@ def main():
                 if step==len(motion)-1:
                     print("plot")
                     r_motion = np.array(r_motion)
-                    pd.DataFrame(r_motion).to_csv("yenming/return.csv",header=None,index=False)
-                    pd.DataFrame(d_motion).to_csv("yenming/desired.csv",header=None,index=False)
-                    msg1 = subprocess.Popen(['scp', 'yenming/return.csv', 'yenming/desired.csv', 'yenming/src/F2_origin.csv','airobots@192.168.1.232:~/Linkage_Robot_simulation/src/localcom/yenming'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                    pd.DataFrame(r_motion).to_csv("Uneven_ctrl/return.csv",header=None,index=False)
+                    pd.DataFrame(d_motion).to_csv("Uneven_ctrl/desired.csv",header=None,index=False)
+                    msg1 = subprocess.Popen(['scp', 'Uneven_ctrl/return.csv', 'Uneven_ctrl/desired.csv', 'Uneven_ctrl/src/F2_origin.csv','airobots@192.168.1.232:~/Linkage_Robot_simulation/src/localcom/Uneven_ctrl'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                 step+=1
             time.sleep(3)
     # while True:
@@ -193,11 +193,11 @@ def main():
     #     if step==299:
     #         print("plot")
     #         r_motion = np.array(r_motion)
-    #         pd.DataFrame(r_motion).to_csv("yenming/return.csv",header=None,index=False)
-    #         pd.DataFrame(d_motion).to_csv("yenming/desired.csv",header=None,index=False)
-    #         msg1 = subprocess.Popen(['scp', 'yenming/return.csv', 'yenming/desired.csv', 'yenming/src/F2.csv','airobots@192.168.1.232:~/Linkage_Robot_simulation/src/localcom/cho'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    #         # msg2 = subprocess.Popen(['scp', 'Cho/desired.csv', 'airobots@192.168.1.232:~/Linkage_Robot_simulation/src/localcom/Cho'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    #         # msg3 = subprocess.Popen(['scp', 'Cho/F2.csv', 'airobots@192.168.1.232:~/Linkage_Robot_simulation/src/localcom/Cho'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    #         pd.DataFrame(r_motion).to_csv("Uneven_ctrl/return.csv",header=None,index=False)
+    #         pd.DataFrame(d_motion).to_csv("Uneven_ctrl/desired.csv",header=None,index=False)
+    #         msg1 = subprocess.Popen(['scp', 'Uneven_ctrl/return.csv', 'Uneven_ctrl/desired.csv', 'Uneven_ctrl/src/F2.csv','airobots@192.168.1.232:~/Linkage_Robot_simulation/src/localcom/Uneven_ctrl'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    #         # msg2 = subprocess.Popen(['scp', 'Uneven_ctrl/desired.csv', 'airobots@192.168.1.232:~/Linkage_Robot_simulation/src/localcom/Uneven_ctrl'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    #         # msg3 = subprocess.Popen(['scp', 'Uneven_ctrl/F2.csv', 'airobots@192.168.1.232:~/Linkage_Robot_simulation/src/localcom/Uneven_ctrl'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     #         break
     #     step+=1
 
@@ -205,15 +205,15 @@ if __name__ == '__main__':
     activation()
     try:
         imu = threading.Thread(target = update_IMU)
-        # fsr = threading.Thread(target = update_fsr)
+        fsr = threading.Thread(target = update_fsr)
         recv = threading.Thread(target = get_status)
         cmd = threading.Thread(target = main)
         imu.start()
-        # fsr.start()
+        fsr.start()
         recv.start()
         cmd.start()
         imu.join()
-        # fsr.join()
+        fsr.join()
         recv.join()
         cmd.join()
         

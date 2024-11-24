@@ -12,44 +12,16 @@ bias=np.array([32,65,186.7,29.1,39,138.3,204.3,45.5,0,-1,0,1.5,0])# 11,13,14,15,
 
 
 r_motion = pd.read_csv("Speed_ctrl/return.csv",header=None,index_col=None)
-# d_motion  = pd.read_csv("localcom/Speed_ctrl/F2.csv",header=None,index_col=None)
 d_motion  = pd.read_csv("Speed_ctrl/desired.csv",header=None,index_col=None)
-# ori_motion = pd.read_csv("localcom/Speed_ctrl/origin.csv",header=None,index_col=None)
-# # 改desired angle rad2degree & add initial pose
-# for i in range(len(d_motion.loc[0])):
-#     for j in range(len(d_motion[0])):
-        # d_motion[i][j]=rad2deg(d_motion[i][j])
-#         ori_motion[i][j]=rad2deg(ori_motion[i][j])
 r_motion = r_motion.iloc[:,1:].T.reset_index(drop=True).T
-# print(r_motion)
 #print每顆馬達的角度圖
 for i in range(0,12):
     plt.subplot(2, 6, i+1)
-    # ori_motion[i].plot()
-    d_motion[i].plot()
+    d_motion[i+1].plot()
     r_motion[i].plot()
-    # x = np.linspace(1, 300, 300)
-    # plt.plot(x, r_motion.iloc[index[i],:])
     plt.legend(['desired','real'])
     plt.xlabel('Timestep')
     plt.ylabel('Degree')
     plt.title(joint_name[i])
 
 plt.show()
-
-# d_motion1 = pd.read_csv("localcom/Speed_ctrl/F2_1.5.csv",header=None,index_col=None)
-# d_motion2 = pd.read_csv("localcom/Speed_ctrl/F2_2.csv",header=None,index_col=None)
-# #print每顆馬達的角度圖
-# for i in range(0,12):
-#     plt.subplot(2, 6, i+1)
-#     # ori_motion[i].plot()
-#     d_motion1[i].plot()
-#     d_motion2[i].plot()
-#     # x = np.linspace(1, 300, 300)
-#     # plt.plot(x, r_motion.iloc[index[i],:])
-#     plt.legend(['1.5','2'])
-#     plt.xlabel('Timestep')
-#     plt.ylabel('Degree')
-#     plt.title(joint_name[i])
-
-# plt.show()

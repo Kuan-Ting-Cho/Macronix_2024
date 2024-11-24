@@ -92,54 +92,7 @@ def main():
             stop = True # emergency_stop
             count+=1
         if stop==True:
-            if step<=trans_point[0]:
-                temp = (step-balance_step)//period[0]+1
-                foot = temp % 2
-                excution_step=balance_step+temp*period[0]
-                if period[0]<period[1]:
-                    Cmd=[[1,3]]*len(Cmd)
-                    if foot == 1 : #right stop 
-                        motion[balance_step+(temp-1)*period[0]:excution_step] = motion_fr
-                    else:
-                        motion[balance_step+(temp-1)*period[0]:excution_step] = motion_fl
-                else:
-                    Cmd=[[0,3]]*len(Cmd)
-                    if foot == 1 : #right stop 
-                        motion[balance_step+(temp-1)*period[0]:excution_step] = motion_fr
-                    else:
-                        motion[balance_step+(temp-1)*period[0]:excution_step] = motion_fl
-            elif (step>trans_point[0] and step<=trans_point[1]):
-                temp = (step-trans_point[0])//period[1]+1
-                foot = temp % 2
-                excution_step=trans_point[0]+temp*period[1]
-                if period[0]<period[1]:
-                    Cmd=[[0,3]]*len(Cmd)
-                    if foot == 1 : #right stop 
-                        motion[trans_point[0]+(temp-1)*period[1]:excution_step] = motion_sr
-                    else:
-                        motion[trans_point[0]+(temp-1)*period[1]:excution_step] = motion_sl
-                else:
-                    Cmd=[[1,3]]*len(Cmd)
-                    if foot == 1 : #right stop 
-                        motion[trans_point[0]+(temp-1)*period[1]:excution_step] = motion_fr
-                    else:
-                        motion[trans_point[0]+(temp-1)*period[1]:excution_step] = motion_fl   
-            elif (step>trans_point[1] and excution_step):
-                temp = (step-trans_point[1])//period[2]+1
-                foot = temp % 2
-                excution_step=trans_point[1]+temp*period[2]
-                if period[1]<period[2]:
-                    Cmd=[[0,3]]*len(Cmd)
-                    if foot == 1 : #right stop 
-                        motion[trans_point[1]+(temp-1)*period[2]:excution_step] = motion_sr
-                    else:
-                        motion[trans_point[1]+(temp-1)*period[2]:excution_step] = motion_sl
-                else:
-                    Cmd=[[1,3]]*len(Cmd)
-                    if foot == 1 : #right stop 
-                        motion[trans_point[1]+(temp-1)*period[2]:excution_step] = motion_fr
-                    else:
-                        motion[trans_point[1]+(temp-1)*period[2]:excution_step] = motion_fl
+           motion, excution_step, Cmd = generate_ST_motion(step, balance_step, trans_point, period, motion, Cmd, motion_fr, motion_fl, motion_sr, motion_sl)
 
         init_imu = IMU_data
         IMU_data = [a - b for a, b in zip(IMU_data, init_imu)] #校正
@@ -167,9 +120,9 @@ def main():
             r_motion = np.array(r_motion)
             pd.DataFrame(r_motion).to_csv("Speed_ctrl/return.csv",header=None,index=False)
             pd.DataFrame(d_motion).to_csv("Speed_ctrl/desired.csv",header=None,index=False)
-            pd.DataFrame(IMU).to_csv("Speed_ctrl/IMU.csv",header=None,index=False)
-            pd.DataFrame(CoP).to_csv("Speed_ctrl/CoP.csv",header=None,index=False)
-            msg1 = subprocess.Popen(['scp', 'Speed_ctrl/return.csv', 'Speed_ctrl/desired.csv', 'Speed_ctrl/src/F2.csv','Speed_ctrl/IMU.csv','Speed_ctrl/CoP.csv','airobots@192.168.1.232:~/Linkage_Robot_simulation/src/localcom/Speed_ctrl'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            # pd.DataFrame(IMU).to_csv("Speed_ctrl/IMU.csv",header=None,index=False)
+            # pd.DataFrame(CoP).to_csv("Speed_ctrl/CoP.csv",header=None,index=False)
+            msg1 = subprocess.Popen(['scp', 'Speed_ctrl/return.csv', 'Speed_ctrl/desired.csv','airobots@192.168.1.232:~/Linkage_Robot_simulation/src/localcom/Speed_ctrl'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             break
         
         if (abs(IMU[-1][1])>10 or distance<0.1):

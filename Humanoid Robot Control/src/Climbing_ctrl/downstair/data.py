@@ -31,9 +31,3 @@ for i in range(12):
         
 
 print(df2)
-
-# 将结果保存为新的CSV文件
-# output_file_path = 'output_file.csv'  # 请将 'output_file.csv' 替换为你的输出文件路径
-# df_extended.to_csv(output_file_path, index=False, header=False)
-
-# print("CSV文件处理完成并保存为", output_file_path)

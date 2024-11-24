@@ -1,7 +1,7 @@
 import numpy as np
 from stable_baselines3 import SAC, TD3
 from Enviroment.env5_wo_vel import RolyEnv
-from Xiang.function import *
+from Climbing_ctrl.function import *
 from robot.scripts.cmd import *
 import threading
 
@@ -54,11 +54,11 @@ def set_env_parameters(env):
 
 def main():
     global init_yaw_bias
-    file = "./Xiang/model/SAC.zip"
+    file = "./Climbing_ctrl/model/SAC.zip"
     test_algo = 1
 
     # 創建自己的環境
-    env = RolyEnv(True, "./Xiang/motordata/forward_data_test.csv")
+    env = RolyEnv(True, "./Climbing_ctrl/motordata/forward_data_test.csv")
 
     # 使用模型進行預測
     obs = env.reset()

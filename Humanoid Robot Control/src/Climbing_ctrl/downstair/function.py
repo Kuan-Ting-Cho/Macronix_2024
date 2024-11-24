@@ -218,23 +218,10 @@ def Data_preprocess(motion, initial_stable_time, floor):
     df = pd.DataFrame([deg2rad(0)]*len(motion.iloc[:, 0]))
     motion=pd.concat([df,motion],axis=1,ignore_index=True)
 
-    # 加一全為零的新列(站直)
-    # df1 = pd.DataFrame([0.0]*len(motion.loc[0])).T
-    # motion=pd.concat([df1,motion],axis=0,ignore_index=True)
-
     # 複製初始蹲姿(這邊給50 time steps)
     df1 = pd.DataFrame(Linear_interp(motion,0,0,initial_stable_time))
     motion=pd.concat([df1,motion],axis=0,ignore_index=True)
 
-    # 在站直與初始蹲姿間做插值
-    # df2 = pd.DataFrame(Linear_interp(motion,0,1,100))
-    # motion=pd.concat([df2,motion],axis=0,ignore_index=True)
-    # motion = motion.drop(100).reset_index(drop=True) 
-
-    #加入站直動作平衡所需的Step(這邊給30 time steps)
-    # df3 = pd.DataFrame(0, index=range(30), columns=range(13))
-    # motion=pd.concat([df3,motion],axis=0,ignore_index=True)  
-    # print(motion)
     df2 = pd.DataFrame(Linear_interp(motion,len(motion)-1,len(motion)-1,50))
     df2[2]=0
     df2[8]=0
@@ -264,27 +251,7 @@ def Data_preprocess(motion, initial_stable_time, floor):
 
 def modify_motion(motion):
     global delay_time
-#波峰波谷
-    # myact=[3]
-    # for idx in myact:
-    #     column = list(motion.iloc[ :,idx])
-    #     wave_idx = [column.index(max(column[0:200])),column.index(min(column[0:200]))]
-    #     wave_idx.sort()
 
-    #     num=10
-
-    #     column[int(wave_idx[0]-num/2):int(wave_idx[0]+num/2)] = [column[wave_idx[0]]]*num
-    #     column[int(wave_idx[1]-num/2):int(wave_idx[1]+num/2)] = [column[wave_idx[1]]]*num
-    #     motion[idx] = pd.DataFrame(column,columns=[idx])
- #dynamix myact delay
-    # dynamix=[2,6,8,12]
-    # for idx in dynamix:
-    #     num = 5
-    #     temp = [0]*num+list(motion.iloc[ :,idx])
-    #     temp = temp[0:len(temp)-num]
-    #     motion[idx] = pd.DataFrame(temp,columns=[idx])
-    # pd.DataFrame(motion).to_csv('./Xiang/hand_modify/motordata/F2_200.csv',header=None,index=False)
-    
     dynamix=[2,6,8,12]
     for idx in dynamix:
         num = 10
@@ -296,12 +263,6 @@ def modify_motion(motion):
             a = [motion.iloc[50+70,idx]]*num
             temp = list(motion.iloc[0:50+70,idx])+a+list(motion.iloc[50+70:len(motion)-num,idx])
         motion[idx] = pd.DataFrame(temp,columns=[idx])
-
-    # for idx in dynamix:
-    #     num = 16+3
-    #     temp = [0]*num+list(motion.iloc[ :,idx])
-    #     temp = temp[0:len(temp)-num]
-    #     motion[idx] = pd.DataFrame(temp,columns=[idx])
         
     pd.DataFrame(motion).to_csv('./Xiang/downstair/motordata/F2_200.csv',header=None,index=False)
     

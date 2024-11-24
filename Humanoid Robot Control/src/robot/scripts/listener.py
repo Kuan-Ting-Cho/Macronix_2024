@@ -159,11 +159,11 @@ if __name__ == '__main__':
         imu.start()
         sub.start()
         pub.start()
-        # fsr.start()
+        fsr.start()
         imu.join()
         sub.join()
         pub.join()
-        # fsr.join()
+        fsr.join()
         print("end")
     except rospy.ROSInterruptException:
         pass
