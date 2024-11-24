@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-#delay 6 steps
 import rospy
 from std_msgs.msg import String,Float32MultiArray,MultiArrayDimension
 import threading
@@ -10,7 +9,7 @@ from invk import *
 import csv
 import copy
 import matplotlib.pyplot as plt
-import pandas as pdccccccccccccccc
+import pandas as pd
 from Chaochi.balance import *
 from Cho.function import *
 from time import time as t

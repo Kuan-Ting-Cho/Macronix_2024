@@ -66,7 +66,7 @@ class MotorUnion(object):
             motor_data.append(self.GetOperating_Mode(i))
             motor_data.append(round(self.GetPresentAngle(i), 2))
             motor_data.append(round(self.GetPresentVelocity(i), 2))
-            motor_data.append(round(self.GetPresentTorque(i), 2))
+            motor_data.append(round(self.GetPresentCurrent(i), 2))
             motor_data.append(round(self.GetAngle(i), 2))
             motor_data.append(self.GetVelocity(i))
             motor_data.append(self.GetAccel(i))
